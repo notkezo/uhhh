@@ -7772,19 +7772,10 @@ addcmd('antilag',{'boostfps','lowgraphics'},function(args, speaker)
 	end)
 end)
 
-addcmd('setfpscap', {'fpscap', 'maxfps'}, function(args, speaker)
-	if setfpscap and type(setfpscap) == "function" then
-		local num = args[1] or 1e6
-		if num == 'none' then
-			return setfpscap(1e6)
-		elseif num > 0 then
-			return setfpscap(num)
-		else
-			return notify('Invalid argument', "Please provide a number above 0 or 'none'.")
-		end
-	else
-		return notify('Incompatible Exploit', 'Your exploit does not support this command (missing setfpscap)')
-	end
+addcmd("setfpscap", {"fpscap", "maxfps"}, function(x)
+    local a = x and tonumber(x)
+    a = (a and (a > 1e6 and 1e6)) or (type(x) == "string" and string.lower(x) == "none" and 1e6) or a
+    return (a and a > 0 and setfpscap(a)) or warn("Invalid argument. Please provide a number above 0 or 'none'.")
 end)
 
 addcmd('notify',{},function(args, speaker)
