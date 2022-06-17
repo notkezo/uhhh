@@ -7771,16 +7771,6 @@ addcmd('antilag',{'boostfps','lowgraphics'},function(args, speaker)
 	end)
 end)
 
-addcmd("setfpscap", {"fpscap", "maxfps"}, function(x)
-    local a = x and tonumber(x)
-    a = (a and (a > 1e6 and 1e6)) or (type(x) == "string" and string.lower(x) == "none" and 1e6) or a
-    return (a and a > 0 and setfpscap(a)) or warn("Invalid argument. Please provide a number above 0 or 'none'.")
-end)
-
-addcmd('notify',{},function(args, speaker)
-	notify(getstring(1))
-end)
-
 addcmd('lastcommand',{'lastcmd'},function(args, speaker)
 	if cmdHistory[1]:sub(1,11) ~= 'lastcommand' and cmdHistory[1]:sub(1,7) ~= 'lastcmd' then
 		execCmd(cmdHistory[1])
