@@ -1,4 +1,44 @@
+local _IsDescendantOf = game.IsDescendantOf
+
+local TextboxBypass
+TextboxBypass = hookmetamethod(game, "__namecall", function(self,...)
+    local method = getnamecallmethod();
+    local args = ...;
+
+    if not checkcaller() then
+        if typeof(self) == "Instance" and method == "GetFocusedTextBox" and self.ClassName == "UserInputService" then
+            local Textbox = TextboxBypass(self,...);
+            if Textbox and typeof(Textbox) == "Instance" then
+                local succ,err = pcall(function() _IsDescendantOf(Textbox, Bypassed_Dex) end)
+
+                if err and err:match("The current identity") then
+                    return nil;
+                end
+            end
+        end
+    end
+
+    return TextboxBypass(self,...);
+end)
+
+--Newproxy Bypass (Stolen from Lego Hacker (V3RM))
+local TableNumbaor001 = {}
+local SomethingOld;
+SomethingOld = hookfunction(getrenv().newproxy, function(...)
+    local proxy = SomethingOld(...)
+    table.insert(TableNumbaor001, proxy)
+    return proxy
+end)
+
+local RunService = cloneref(game:GetService("RunService"))
+RunService.Stepped:Connect(function()
+    for i,v in pairs(TableNumbaor001) do
+        if v == nil then end
+    end
+end)
+
 if IY_LOADED and not _G.IY_DEBUG == true then
+	error("Infinite Yield is already running!",0)
 	return
 end
 
@@ -11,7 +51,7 @@ if not game:IsLoaded() then
 	notLoaded:Destroy()
 end
 
-ver = ''
+ver = '5.8'
 
 Players = game:GetService("Players")
 
@@ -65,26 +105,6 @@ Cmdbar_2 = Instance.new("TextBox")
 Toggles = Instance.new("ScrollingFrame")
 Fly = Instance.new("TextLabel")
 Select_3 = Instance.new("TextButton")
-Noclip = Instance.new("TextLabel")
-Select_4 = Instance.new("TextButton")
-Float = Instance.new("TextLabel")
-Select_5 = Instance.new("TextButton")
-ClickTP = Instance.new("TextLabel")
-Select_6 = Instance.new("TextButton")
-ClickDelete = Instance.new("TextLabel")
-Select_13 = Instance.new("TextButton") 
-Xray = Instance.new("TextLabel")
-Select_10 = Instance.new("TextButton")
-Swim = Instance.new("TextLabel")
-Select_11 = Instance.new("TextButton")
-Fling = Instance.new("TextLabel")
-Select_12 = Instance.new("TextButton")
-Invisible = Instance.new("TextLabel")
-Select_14 = Instance.new("TextButton")
-Vehiclefly = Instance.new("TextLabel")
-Select_15 = Instance.new("TextButton")
-VehicleNoclip = Instance.new("TextLabel")
-Select_16 = Instance.new("TextButton")
 shadow_2 = Instance.new("Frame")
 PopupText_2 = Instance.new("TextLabel")
 Exit_2 = Instance.new("TextButton")
@@ -181,7 +201,7 @@ elseif get_hidden_gui or gethui then
 	local hiddenUI = get_hidden_gui or gethui
 	local Main = Instance.new("ScreenGui")
 	Main.Name = randomString()
-	Main.Parent = hiddenUI()
+	Main.Parent = gethui()
 	PARENT = Main
 elseif COREGUI:FindFirstChild('RobloxGui') then
 	PARENT = COREGUI.RobloxGui
@@ -217,7 +237,7 @@ Title.BorderSizePixel = 0
 Title.Size = UDim2.new(0, 250, 0, 20)
 Title.Font = Enum.Font.SourceSans
 Title.TextSize = 18
-Title.Text = "🦈notkezo🦈"
+Title.Text = "Infinite Yield FE v"..ver
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.ZIndex = 10
 table.insert(shade1,Title)
@@ -865,296 +885,6 @@ Select_3.TextColor3 = Color3.new(0, 0, 0)
 Select_3.ZIndex = 10
 table.insert(shade3,Select_3)
 table.insert(text2,Select_3)
-
-Noclip.Name = "Noclip"
-Noclip.Parent = Toggles
-Noclip.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Noclip.BorderSizePixel = 0
-Noclip.Position = UDim2.new(0, 0, 0, 25)
-Noclip.Size = UDim2.new(0, 192, 0, 20)
-Noclip.Font = Enum.Font.SourceSans
-Noclip.TextSize = 14
-Noclip.Text = "    Toggle Noclip"
-Noclip.TextColor3 = Color3.new(1, 1, 1)
-Noclip.TextXAlignment = Enum.TextXAlignment.Left
-Noclip.ZIndex = 10
-table.insert(shade2,Noclip)
-table.insert(text1,Noclip)
-
-Select_4.Name = "Select"
-Select_4.Parent = Noclip
-Select_4.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_4.BorderSizePixel = 0
-Select_4.Position = UDim2.new(0, 152, 0, 0)
-Select_4.Size = UDim2.new(0, 40, 0, 20)
-Select_4.Font = Enum.Font.SourceSans
-Select_4.TextSize = 14
-Select_4.Text = "Add"
-Select_4.TextColor3 = Color3.new(0, 0, 0)
-Select_4.ZIndex = 10
-table.insert(shade3,Select_4)
-table.insert(text2,Select_4)
-
-Float.Name = "Float"
-Float.Parent = Toggles
-Float.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Float.BorderSizePixel = 0
-Float.Position = UDim2.new(0, 0, 0, 50)
-Float.Size = UDim2.new(0, 192, 0, 20)
-Float.Font = Enum.Font.SourceSans
-Float.TextSize = 14
-Float.Text = "    Toggle Float"
-Float.TextColor3 = Color3.new(1, 1, 1)
-Float.TextXAlignment = Enum.TextXAlignment.Left
-Float.ZIndex = 10
-table.insert(shade2,Float)
-table.insert(text1,Float)
-
-Select_5.Name = "Select"
-Select_5.Parent = Float
-Select_5.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_5.BorderSizePixel = 0
-Select_5.Position = UDim2.new(0, 152, 0, 0)
-Select_5.Size = UDim2.new(0, 40, 0, 20)
-Select_5.Font = Enum.Font.SourceSans
-Select_5.TextSize = 14
-Select_5.Text = "Add"
-Select_5.TextColor3 = Color3.new(0, 0, 0)
-Select_5.ZIndex = 10
-table.insert(shade3,Select_5)
-table.insert(text2,Select_5)
-
-ClickTP.Name = "Click TP"
-ClickTP.Parent = Toggles
-ClickTP.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-ClickTP.BorderSizePixel = 0
-ClickTP.Position = UDim2.new(0, 0, 0, 75)
-ClickTP.Size = UDim2.new(0, 192, 0, 20)
-ClickTP.Font = Enum.Font.SourceSans
-ClickTP.TextSize = 14
-ClickTP.Text = "    Click TP (Hold Key & Click)"
-ClickTP.TextColor3 = Color3.new(1, 1, 1)
-ClickTP.TextXAlignment = Enum.TextXAlignment.Left
-ClickTP.ZIndex = 10
-table.insert(shade2,ClickTP)
-table.insert(text1,ClickTP)
-
-Select_6.Name = "Select"
-Select_6.Parent = ClickTP
-Select_6.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_6.BorderSizePixel = 0
-Select_6.Position = UDim2.new(0, 152, 0, 0)
-Select_6.Size = UDim2.new(0, 40, 0, 20)
-Select_6.Font = Enum.Font.SourceSans
-Select_6.TextSize = 14
-Select_6.Text = "Add"
-Select_6.TextColor3 = Color3.new(0, 0, 0)
-Select_6.ZIndex = 10
-table.insert(shade3,Select_6)
-table.insert(text2,Select_6)
-
-ClickDelete.Name = "Click Delete"
-ClickDelete.Parent = Toggles
-ClickDelete.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-ClickDelete.BorderSizePixel = 0
-ClickDelete.Position = UDim2.new(0, 0, 0, 100)
-ClickDelete.Size = UDim2.new(0, 192, 0, 20)
-ClickDelete.Font = Enum.Font.SourceSans
-ClickDelete.TextSize = 14
-ClickDelete.Text = "    Click Delete (Hold Key & Click)"
-ClickDelete.TextColor3 = Color3.new(1, 1, 1)
-ClickDelete.TextXAlignment = Enum.TextXAlignment.Left
-ClickDelete.ZIndex = 10
-table.insert(shade2,ClickDelete)
-table.insert(text1,ClickDelete)
-
-Select_13.Name = "Select"
-Select_13.Parent = ClickDelete
-Select_13.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_13.BorderSizePixel = 0
-Select_13.Position = UDim2.new(0, 152, 0, 0)
-Select_13.Size = UDim2.new(0, 40, 0, 20)
-Select_13.Font = Enum.Font.SourceSans
-Select_13.TextSize = 14
-Select_13.Text = "Add"
-Select_13.TextColor3 = Color3.new(0, 0, 0)
-Select_13.ZIndex = 10
-table.insert(shade3,Select_13)
-table.insert(text2,Select_13) 
-
-Xray.Name = "Xray"
-Xray.Parent = Toggles
-Xray.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Xray.BorderSizePixel = 0
-Xray.Position = UDim2.new(0, 0, 0, 125)
-Xray.Size = UDim2.new(0, 192, 0, 20)
-Xray.Font = Enum.Font.SourceSans
-Xray.TextSize = 14
-Xray.Text = "    Toggle Xray"
-Xray.TextColor3 = Color3.new(1, 1, 1)
-Xray.TextXAlignment = Enum.TextXAlignment.Left
-Xray.ZIndex = 10
-table.insert(shade2,Xray)
-table.insert(text1,Xray)
-
-Select_10.Name = "Select"
-Select_10.Parent = Xray
-Select_10.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_10.BorderSizePixel = 0
-Select_10.Position = UDim2.new(0, 152, 0, 0)
-Select_10.Size = UDim2.new(0, 40, 0, 20)
-Select_10.Font = Enum.Font.SourceSans
-Select_10.TextSize = 14
-Select_10.Text = "Add"
-Select_10.TextColor3 = Color3.new(0, 0, 0)
-Select_10.ZIndex = 10
-table.insert(shade3,Select_10)
-table.insert(text2,Select_10)
-
-Swim.Name = "Swim"
-Swim.Parent = Toggles
-Swim.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Swim.BorderSizePixel = 0
-Swim.Position = UDim2.new(0, 0, 0, 150)
-Swim.Size = UDim2.new(0, 192, 0, 20)
-Swim.Font = Enum.Font.SourceSans
-Swim.TextSize = 14
-Swim.Text = "    Toggle Swim"
-Swim.TextColor3 = Color3.new(1, 1, 1)
-Swim.TextXAlignment = Enum.TextXAlignment.Left
-Swim.ZIndex = 10
-table.insert(shade2,Swim)
-table.insert(text1,Swim)
-
-Select_11.Name = "Select"
-Select_11.Parent = Swim
-Select_11.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_11.BorderSizePixel = 0
-Select_11.Position = UDim2.new(0, 152, 0, 0)
-Select_11.Size = UDim2.new(0, 40, 0, 20)
-Select_11.Font = Enum.Font.SourceSans
-Select_11.TextSize = 14
-Select_11.Text = "Add"
-Select_11.TextColor3 = Color3.new(0, 0, 0)
-Select_11.ZIndex = 10
-table.insert(shade3,Select_11)
-table.insert(text2,Select_11)
-
-Fling.Name = "Fling"
-Fling.Parent = Toggles
-Fling.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Fling.BorderSizePixel = 0
-Fling.Position = UDim2.new(0, 0, 0, 175)
-Fling.Size = UDim2.new(0, 192, 0, 20)
-Fling.Font = Enum.Font.SourceSans
-Fling.TextSize = 14
-Fling.Text = "    Toggle Fling"
-Fling.TextColor3 = Color3.new(1, 1, 1)
-Fling.TextXAlignment = Enum.TextXAlignment.Left
-Fling.ZIndex = 10
-table.insert(shade2,Fling)
-table.insert(text1,Fling)
-
-Select_12.Name = "Select"
-Select_12.Parent = Fling
-Select_12.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_12.BorderSizePixel = 0
-Select_12.Position = UDim2.new(0, 152, 0, 0)
-Select_12.Size = UDim2.new(0, 40, 0, 20)
-Select_12.Font = Enum.Font.SourceSans
-Select_12.TextSize = 14
-Select_12.Text = "Add"
-Select_12.TextColor3 = Color3.new(0, 0, 0)
-Select_12.ZIndex = 10
-table.insert(shade3,Select_12)
-table.insert(text2,Select_12)
-
-Invisible.Name = "Invisible"
-Invisible.Parent = Toggles
-Invisible.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Invisible.BorderSizePixel = 0
-Invisible.Position = UDim2.new(0, 0, 0, 200)
-Invisible.Size = UDim2.new(0, 192, 0, 20)
-Invisible.Font = Enum.Font.SourceSans
-Invisible.TextSize = 14
-Invisible.Text = "    Toggle Invisible"
-Invisible.TextColor3 = Color3.new(1, 1, 1)
-Invisible.TextXAlignment = Enum.TextXAlignment.Left
-Invisible.ZIndex = 10
-table.insert(shade2,Invisible)
-table.insert(text1,Invisible)
-
-Select_14.Name = "Select"
-Select_14.Parent = Invisible
-Select_14.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_14.BorderSizePixel = 0
-Select_14.Position = UDim2.new(0, 152, 0, 0)
-Select_14.Size = UDim2.new(0, 40, 0, 20)
-Select_14.Font = Enum.Font.SourceSans
-Select_14.TextSize = 14
-Select_14.Text = "Add"
-Select_14.TextColor3 = Color3.new(0, 0, 0)
-Select_14.ZIndex = 10
-table.insert(shade3,Select_14)
-table.insert(text2,Select_14)
-
-Vehiclefly.Name = "VehicleFly"
-Vehiclefly.Parent = Toggles
-Vehiclefly.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Vehiclefly.BorderSizePixel = 0
-Vehiclefly.Position = UDim2.new(0, 0, 0, 225)
-Vehiclefly.Size = UDim2.new(0, 192, 0, 20)
-Vehiclefly.Font = Enum.Font.SourceSans
-Vehiclefly.TextSize = 14
-Vehiclefly.Text = "    Toggle VehicleFly"
-Vehiclefly.TextColor3 = Color3.new(1, 1, 1)
-Vehiclefly.TextXAlignment = Enum.TextXAlignment.Left
-Vehiclefly.ZIndex = 10
-table.insert(shade2,Vehiclefly)
-table.insert(text1,Vehiclefly)
-
-Select_15.Name = "Select"
-Select_15.Parent = Vehiclefly
-Select_15.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_15.BorderSizePixel = 0
-Select_15.Position = UDim2.new(0, 152, 0, 0)
-Select_15.Size = UDim2.new(0, 40, 0, 20)
-Select_15.Font = Enum.Font.SourceSans
-Select_15.TextSize = 14
-Select_15.Text = "Add"
-Select_15.TextColor3 = Color3.new(0, 0, 0)
-Select_15.ZIndex = 10
-table.insert(shade3,Select_15)
-table.insert(text2,Select_15)
-
-VehicleNoclip.Name = "VehicleNoclip"
-VehicleNoclip.Parent = Toggles
-VehicleNoclip.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-VehicleNoclip.BorderSizePixel = 0
-VehicleNoclip.Position = UDim2.new(0, 0, 0, 250)
-VehicleNoclip.Size = UDim2.new(0, 192, 0, 20)
-VehicleNoclip.Font = Enum.Font.SourceSans
-VehicleNoclip.TextSize = 14
-VehicleNoclip.Text = "    Toggle VehicleNoclip"
-VehicleNoclip.TextColor3 = Color3.new(1, 1, 1)
-VehicleNoclip.TextXAlignment = Enum.TextXAlignment.Left
-VehicleNoclip.ZIndex = 10
-table.insert(shade2,VehicleNoclip)
-table.insert(text1,VehicleNoclip)
-
-Select_16.Name = "Select"
-Select_16.Parent = VehicleNoclip
-Select_16.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_16.BorderSizePixel = 0
-Select_16.Position = UDim2.new(0, 152, 0, 0)
-Select_16.Size = UDim2.new(0, 40, 0, 20)
-Select_16.Font = Enum.Font.SourceSans
-Select_16.TextSize = 14
-Select_16.Text = "Add"
-Select_16.TextColor3 = Color3.new(0, 0, 0)
-Select_16.ZIndex = 10
-table.insert(shade3,Select_16)
-table.insert(text2,Select_16)
 
 shadow_2.Name = "shadow"
 shadow_2.Parent = KeybindEditor
@@ -5126,6 +4856,34 @@ function addcmdtext(text,name,desc)
 	end
 end
 
+local WTS = function(Object)
+	local ObjectVector = workspace.CurrentCamera:WorldToScreenPoint(Object.Position)
+	return Vector2.new(ObjectVector.X, ObjectVector.Y)
+end
+
+local MousePositionToVector2 = function()
+	return Vector2.new(IYMouse.X, IYMouse.Y)
+end
+
+local GetClosestPlayerFromCursor = function()
+	local found = nil
+    local ClosestDistance = math.huge
+    for i, v in pairs(Players:GetPlayers()) do
+        if v ~= Players.LocalPlayer and v.Character and v.Character:FindFirstChildOfClass("Humanoid") then
+            for k, x in pairs(v.Character:GetChildren()) do
+				if string.find(x.Name, "Torso") then
+					local Distance = (WTS(x) - MousePositionToVector2()).Magnitude
+					if Distance < ClosestDistance then
+						ClosestDistance = Distance
+						found = v
+					end
+				end
+            end
+        end
+    end
+	return found
+end
+
 SpecialPlayerCases = {
 	["all"] = function(speaker) return Players:GetPlayers() end,
 	["others"] = function(speaker)
@@ -5325,7 +5083,13 @@ SpecialPlayerCases = {
 			end
 		end
 		return returns
-	end
+	end,
+	["cursor"] = function(speaker)
+		local plrs = {}
+		local v = GetClosestPlayerFromCursor()
+		if v ~= nil then table.insert(plrs, v) end
+		return plrs
+	end,
 }
 
 function toTokens(str)
@@ -5780,6 +5544,46 @@ local bindsGUI = KeybindEditor
 local awaitingInput = false
 local keySelected = false
 
+local positionbind = 0
+makeBindsButton = function(text, cmd, to)
+	local tog = Fly:Clone()
+	tog.Name = text
+	tog.Parent = Toggles
+	tog.Text = "    " .. text
+	positionbind = positionbind + 25
+	tog.Position = UDim2.new(0, 0, 0, positionbind)
+	table.insert(shade2, tog)
+	table.insert(text1, tog)
+	local togsel = Select_3:Clone()
+	togsel.Parent = tog
+	table.insert(shade3, togsel)
+	table.insert(text2, togsel)
+	togsel.MouseButton1Click:Connect(function()
+		if keySelected then
+			addbind(cmd,keyPressed,bindChosenKeyUp)
+			refreshbinds()
+			updatesaves()
+			if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
+				notify('Keybinds Updated','Binded '..keyPressed..' to '..to)
+			else
+				notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to '..to)
+			end
+		end
+	end)
+end
+
+makeBindsButton("Toggle Noclip", "togglenoclip", "toggle noclip")
+makeBindsButton("Toggle Float", "togglefloat", "toggle float")
+makeBindsButton("Click TP (Hold Key & Click)", "clicktp", "click tp")
+makeBindsButton("Click Delete (Hold Key & Click)", "clickdel", "click delete")
+makeBindsButton("Toggle Xray", "togglexray", "toggle xray")
+makeBindsButton("Toggle Swim", "toggleswim", "toggle swim")
+makeBindsButton("Toggle Fling", "togglefling", "toggle fling")
+makeBindsButton("Toggle Invisible", "toggleinvis", "toggle invisible")
+makeBindsButton("Toggle VehicleFly", "togglevfly", "toggle vehiclefly")
+makeBindsButton("Toggle VehicleNoclip", "togglevnoclip", "toggle vehiclenoclip")
+Toggles.CanvasSize = UDim2.new(0, 0, 0, positionbind + 20)
+
 function unkeybind(cmd,key)
 	for i = #binds,1,-1 do
 		if binds[i].COMMAND == cmd and binds[i].KEY == key then
@@ -6017,136 +5821,6 @@ Fly.Select.MouseButton1Click:Connect(function()
 			notify('Keybinds Updated','Binded '..keyPressed..' to toggle fly')
 		else
 			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle fly')
-		end
-	end
-end)
-
-Noclip.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('togglenoclip',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle noclip')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle noclip')
-		end
-	end
-end)
-
-Float.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('togglefloat',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle float')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle float')
-		end
-	end
-end)
-
-ClickTP.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('clicktp',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to click tp')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to click tp')
-		end
-	end
-end)
-
-ClickDelete.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('clickdel',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to click delete')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to click delete')
-		end
-	end
-end)
-
-Xray.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('togglexray',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle xray')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle xray')
-		end
-	end
-end)
-
-Swim.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('toggleswim',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle swim')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle swim')
-		end
-	end
-end)
-
-Fling.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('togglefling',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle fling')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle fling')
-		end
-	end
-end)
-
-Invisible.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('toggleinvis',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle invisible')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle invisible')
-		end
-	end
-end)
-
-Vehiclefly.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('togglevfly',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle vehiclefly')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle vehiclefly')
-		end
-	end
-end)
-
-VehicleNoclip.Select.MouseButton1Click:Connect(function()
-	if keySelected then
-		addbind('togglevnoclip',keyPressed,bindChosenKeyUp)
-		refreshbinds()
-		updatesaves()
-		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle vehiclenoclip')
-		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle vehiclenoclip')
 		end
 	end
 end)
@@ -6965,11 +6639,11 @@ function sFLY(vfly)
 		FLYING = true
 		local BG = Instance.new('BodyGyro')
 		local BV = Instance.new('BodyVelocity')
+        BG.Name = randomString()
+        BV.Name = randomString()
 		BG.P = 9e4
 		BG.Parent = T
 		BV.Parent = T
-		BG.Name = randomString()
-		BV.Name = randomString()
 		BG.maxTorque = Vector3.new(9e9, 9e9, 9e9)
 		BG.cframe = T.CFrame
 		BV.velocity = Vector3.new(0, 0, 0)
@@ -7153,10 +6827,9 @@ addcmd('float', {'platform'},function(args, speaker)
 			Float.Name = floatName
 			Float.Parent = pchar
 			Float.Transparency = 1
-			Float.Size = Vector3.new(6,1,6)
+			Float.Size = Vector3.new(0.001,0.2,0.001)
 			Float.Anchored = true
-			local FloatValue = -3.5
-			if r15(speaker) then FloatValue = -3.65 end
+			local FloatValue = -3.1
 			Float.CFrame = getRoot(pchar).CFrame * CFrame.new(0,FloatValue,0)
 			notify('Float','Float Enabled (Q = down & E = up)')
 			qUp = IYMouse.KeyUp:Connect(function(KEY)
@@ -7179,7 +6852,7 @@ addcmd('float', {'platform'},function(args, speaker)
 					FloatValue = FloatValue + 0.5
 				end
 			end)
-			floatDied = speaker.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+			floatDied = speaker.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()
 				FloatingFunc:Disconnect()
 				Float:Destroy()
 				qUp:Disconnect()
@@ -7232,56 +6905,51 @@ addcmd('togglefloat',{},function(args, speaker)
 end)
 
 swimming = false
+local oldgrav = workspace.Gravity
+local swimbeat = nil
 addcmd('swim',{},function(args, speaker)
-	workspace.Gravity = 0
-	local function swimDied()
-		workspace.Gravity = 198.2
-		swimming = false
+	if not swimming and speaker and speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid") then
+		oldgrav = workspace.Gravity
+		workspace.Gravity = 0
+		local swimDied = function()
+			workspace.Gravity = oldgrav
+			swimming = false
+		end
+		local Humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+		gravReset = Humanoid.Died:Connect(swimDied)
+		local enums = Enum.HumanoidStateType:GetEnumItems()
+		table.remove(enums, table.find(enums, Enum.HumanoidStateType.None))
+		for i, v in pairs(enums) do
+			Humanoid:SetStateEnabled(v, false)
+		end
+		Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+		swimbeat = game:GetService("RunService").Heartbeat:Connect(function()
+			pcall(function()
+				speaker.Character.HumanoidRootPart.Velocity = ((Humanoid.MoveDirection ~= Vector3.new() or UserInputService:IsKeyDown(Enum.KeyCode.Space)) and speaker.Character.HumanoidRootPart.Velocity or Vector3.new())
+			end)
+		end)
+		swimming = true
 	end
-	local Humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-	gravReset = Humanoid.Died:Connect(swimDied)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
-	Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
-	swimming = true
 end)
 
 addcmd('unswim',{'noswim'},function(args, speaker)
-	workspace.Gravity = 198.2
-	swimming = false
-	if gravReset then
-		gravReset:Disconnect()
+	if speaker and speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid") then
+		workspace.Gravity = oldgrav
+		swimming = false
+		if gravReset then
+			gravReset:Disconnect()
+		end
+		if swimbeat ~= nil then
+			swimbeat:Disconnect()
+			swimbeat = nil
+		end
+		local Humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+		local enums = Enum.HumanoidStateType:GetEnumItems()
+		table.remove(enums, table.find(enums, Enum.HumanoidStateType.None))
+		for i, v in pairs(enums) do
+			Humanoid:SetStateEnabled(v, true)
+		end
 	end
-	local Humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
-	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
-	Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
 end)
 
 addcmd('toggleswim',{},function(args, speaker)
@@ -7769,6 +7437,25 @@ addcmd('antilag',{'boostfps','lowgraphics'},function(args, speaker)
 			end
 		end)()
 	end)
+end)
+
+addcmd('setfpscap', {'fpscap', 'maxfps'}, function(args, speaker)
+	if setfpscap and type(setfpscap) == "function" then
+		local num = args[1] or 1e6
+		if num == 'none' then
+			return setfpscap(1e6)
+		elseif num > 0 then
+			return setfpscap(num)
+		else
+			return notify('Invalid argument', "Please provide a number above 0 or 'none'.")
+		end
+	else
+		return notify('Incompatible Exploit', 'Your exploit does not support this command (missing setfpscap)')
+	end
+end)
+
+addcmd('notify',{},function(args, speaker)
+	notify(getstring(1))
 end)
 
 addcmd('lastcommand',{'lastcmd'},function(args, speaker)
@@ -8494,10 +8181,14 @@ addcmd('antiafk',{'antiidle'},function(args, speaker)
 				v["Disconnect"](v)
 			end
 		end
-		notify('Anti Idle','Anti idle is enabled')
 	else
-		notify('Incompatible Exploit','Your exploit does not support this command (missing getconnections)')
+        local VirtualUser = game:GetService("VirtualUser")
+        Players.LocalPlayer.Idled:Connect(function()
+            VirtualUser:CaptureController()
+            VirtualUser:ClickButton2(Vector2.new())
+        end)
 	end
+    notify('Anti Idle','Anti idle is enabled')
 end)
 
 addcmd('datalimit',{},function(args, speaker)
@@ -8948,7 +8639,7 @@ addcmd('thaw',{'unfreeze','unfr'},function(args, speaker)
 		for i,v in pairs(players) do
 			task.spawn(function()
 				for i, x in next, Players[v].Character:GetDescendants() do
-					if x:IsA("BasePart") and x.Anchored then
+					if x.Name ~= floatName and x:IsA("BasePart") and x.Anchored then
 						x.Anchored = false
 					end
 				end
@@ -9343,39 +9034,52 @@ addcmd('nolimbs',{'rlimbs'},function(args, speaker)
 end)
 
 addcmd('nohead',{'rhead','headless'},function(args, speaker)
-local lp = game:GetService "Players".LocalPlayer
-if lp.Character:FindFirstChild "Head" then
-    local char = lp.Character
-    char.Archivable = true
-    local new = char:Clone()
-    new.Parent = workspace
-    lp.Character = new
-    wait(2)
-    local oldhum = char:FindFirstChildWhichIsA "Humanoid"
-    local newhum = oldhum:Clone()
-    newhum.Parent = char
-    newhum.RequiresNeck = false
-    oldhum.Parent = nil
-    wait(2)
-    lp.Character = char
-    new:Destroy()
-    wait(1)
-    newhum:GetPropertyChangedSignal("Health"):Connect(
-        function()
-            if newhum.Health <= 0 then
-                oldhum.Parent = lp.Character
-                wait(1)
-                oldhum:Destroy()
-            end
-        end)
-    workspace.CurrentCamera.CameraSubject = char
-    if char:FindFirstChild "Animate" then
-        char.Animate.Disabled = true
-        wait(.1)
-        char.Animate.Disabled = false
-    end
-    lp.Character:FindFirstChild "Head":Destroy()
-end
+	if sethidden then
+		-- Full credit to Thomas_Cornez#0272 @Discord
+		local lplr = Players.LocalPlayer
+		local char = lplr.Character
+		local rig = tostring(char:FindFirstChildOfClass('Humanoid').RigType) == "Enum.HumanoidRigType.R6" and 1 or tostring(char:FindFirstChildOfClass('Humanoid').RigType) == "Enum.HumanoidRigType.R15" and 2
+
+		local speaker = Players.LocalPlayer
+
+		sethidden(speaker, "SimulationRadius", math.huge)
+
+		local test = Instance.new("Model")
+		local hum  = Instance.new("Humanoid")
+		local animation = Instance.new("Model")
+		local humanoidanimation = Instance.new("Humanoid")
+		test.Parent = workspace
+		hum.Parent = test
+		animation.Parent = workspace
+		humanoidanimation.Parent = animation
+
+		lplr.Character = test
+		wait(2)
+		char:FindFirstChildOfClass('Humanoid').Animator.Parent = humanoidanimation
+		char:FindFirstChildOfClass('Humanoid'):Destroy()
+
+		char.Head:Destroy()
+		wait(5)
+		Players.LocalPlayer.Character = char
+
+		local hum2 = Instance.new("Humanoid")
+		hum2.Parent = char
+		char:FindFirstChildOfClass("Humanoid").Jump = true
+
+		humanoidanimation.Animator.Parent = hum2
+		char.Animate.Disabled = true
+		wait()
+		char.Animate.Disabled = false
+		wait()
+
+		if rig == 1 then
+			hum2.HipHeight = 0
+		elseif rig == 2 then
+			hum2.HipHeight = 2.19
+		end
+	else
+		notify('Incompatible Exploit','Your exploit does not support this command (missing sethiddenproperty)')
+	end
 end)
 
 addcmd('noarms',{'rarms'},function(args, speaker)
@@ -9990,206 +9694,6 @@ addcmd('console',{},function(args, speaker)
 end)
 
 addcmd('explorer',{'dex'},function(args, speaker)
-	notify("Loading",'Hold on a sec')
-    --[[ Dex Loader by cirmolddry#2299 || Modded by HamstaGang ]]
-
---[[
-This script has many bypasses to keep DEX secured.
-NewProxy Bypass
-GetGC Spoof
-Memory Spoof
-ContentProvider Bypass
-GetFocusedTextBox Bypass
-DecendantAdded Disabler
-CloneRef (Overall protection of Instances and other UserData)
-]]
-
--- Cloneref support (adds support for JJsploit/Temple/Electron and other sploits that don't have cloneref or really shit versions of it.)
-local a=Instance.new("Part")for b,c in pairs(getreg())do if type(c)=="table"and#c then if rawget(c,"__mode")=="kvs"then for d,e in pairs(c)do if e==a then getgenv().InstanceList=c;break end end end end end;local f={}function f.invalidate(g)if not InstanceList then return end;for b,c in pairs(InstanceList)do if c==g then InstanceList[b]=nil;return g end end end;if not cloneref or IsElectron then getgenv().cloneref=f.invalidate end
-
--- Dex Bypasses
-spawn(function()
-    repeat task.wait() until game:IsLoaded()
-
-    local Amplitude = 200
-    local RandomValue = {-15,15}
-    local RandomTime = {.5, 1.5}
-
-    local floor = math.floor
-    local cos = math.cos
-    local sin = math.sin
-    local acos = math.acos
-    local pi = math.pi
-
-    local Maxima = 0
-
-    --Waiting for gcinfo to decrease
-    while task.wait() do
-        if gcinfo() >= Maxima then
-            Maxima = gcinfo()
-        else
-            break
-        end
-    end
-
-    task.wait(0.30)
-
-    local OldGcInfo = gcinfo()+Amplitude
-    local tick = 0
-
-    --Spoofing gcinfo
-    local Old; Old = hookfunction(gcinfo, function(...)
-        local Formula = ((acos(cos(pi * (tick)))/pi * (Amplitude * 2)) + -Amplitude )
-        return floor(OldGcInfo + Formula)
-    end)
-    local Old2; Old2 = hookfunction(collectgarbage, function(arg, ...)
-        local suc, err = pcall(Old2, arg, ...)
-        if suc and arg == "collect" then
-            return gcinfo(...)
-        end
-        return Old2(arg, ...)
-    end)
-
-
-    game:GetService("RunService").Stepped:Connect(function()
-        local Formula = ((acos(cos(pi * (tick)))/pi * (Amplitude * 2)) + -Amplitude )
-        if Formula > ((acos(cos(pi * (tick)+.01))/pi * (Amplitude * 2)) + -Amplitude ) then
-            tick = tick + .07
-        else
-            tick = tick + 0.01
-        end
-    end)
-
-    local old1 = Amplitude
-    for i,v in next, RandomTime do
-        RandomTime[i] = v * 10000
-    end
-
-    local RandomTimeValue = math.random(RandomTime[1],RandomTime[2])/10000
-
-    --I can make it 0.003 seconds faster, yea, sure
-    while wait(RandomTime) do
-        Amplitude = math.random(old1+RandomValue[1], old1+RandomValue[2])
-        RandomTimeValue = math.random(RandomTime[1],RandomTime[2])/10000
-    end
-end)
-
--- Memory Bypass
-spawn(function()
-    repeat task.wait() until game:IsLoaded()
-
-    local RunService = cloneref(game:GetService("RunService"))
-    local Stats = cloneref(game:GetService("Stats"))
-
-    local CurrMem = Stats:GetTotalMemoryUsageMb();
-    local Rand = 0
-
-    RunService.Stepped:Connect(function()
-        Rand = math.random(-3,3)
-    end)
-
-    local _MemBypass
-    _MemBypass = hookmetamethod(game, "__namecall", function(self,...)
-        local method = getnamecallmethod();
-
-        if not checkcaller() then
-            if typeof(self) == "Instance" and (method == "GetTotalMemoryUsageMb" or method == "getTotalMemoryUsageMb") and self.ClassName == "Stats" then
-                return CurrMem + Rand;
-            end
-        end
-
-        return _MemBypass(self,...)
-    end)
-
-    -- Indexed Versions
-    local _MemBypassIndex; _MemBypassIndex = hookfunction(Stats.GetTotalMemoryUsageMb, function(self, ...)
-        if not checkcaller() then
-            if typeof(self) == "Instance" and self.ClassName == "Stats" then
-                return CurrMem + Rand;
-            end
-        end
-    end)
-end)
-
--- ContentProvider Bypasses
-local Content = cloneref(game:GetService("ContentProvider"));
-local CoreGui = cloneref(game:GetService("CoreGui"));
-local randomizedCoreGuiTable;
-local randomizedGameTable;
-
-local coreguiTable = {}
-
-game:GetService("ContentProvider"):PreloadAsync({CoreGui}, function(assetId) --use preloadasync to patch preloadasync :troll:
-    if not assetId:find("rbxassetid://") then
-        table.insert(coreguiTable, assetId);
-end
-end)
-local gameTable = {}
-
-for i, v in pairs(game:GetDescendants()) do
-    if v:IsA("ImageLabel") then
-        if v.Image:find('rbxassetid://') and v:IsDescendantOf(CoreGui) then else
-            table.insert(gameTable, v.Image)
-        end
-    end
-end
-
-function randomizeTable(t)
-    local n = #t
-    while n > 0 do
-        local k = math.random(n)
-        t[n], t[k] = t[k], t[n]
-        n = n - 1
-    end
-    return t
-end
-
-local ContentProviderBypass
-ContentProviderBypass = hookmetamethod(game, "__namecall", function(self, Instances, ...)
-    local method = getnamecallmethod();
-    local args = ...;
-
-    if not checkcaller() and (method == "preloadAsync" or method == "PreloadAsync") then
-        if Instances and Instances[1] and self.ClassName == "ContentProvider" then
-            if Instances ~= nil then
-                if typeof(Instances[1]) == "Instance" and (table.find(Instances, CoreGui) or table.find(Instances, game)) then
-                    if Instances[1] == CoreGui then
-                        randomizedCoreGuiTable = randomizeTable(coreguiTable)
-                        return ContentProviderBypass(self, randomizedCoreGuiTable, ...)
-                    end
-
-                    if Instances[1] == game then
-                        randomizedGameTable = randomizeTable(gameTable)
-                        return ContentProviderBypass(self, randomizedGameTable, ...)
-                    end
-                end
-            end
-        end
-    end
-
-    return ContentProviderBypass(self, Instances, ...)
-end)
-
-local preloadBypass; preloadBypass = hookfunction(Content.PreloadAsync, function(a, b, c)
-    if not checkcaller() then
-        if typeof(a) == "Instance" and tostring(a) == "ContentProvider" and typeof(b) == "table" then
-            if (table.find(b, CoreGui) or table.find(b, game)) and not (table.find(b, true) or table.find(b, false)) then
-                if b[1] == CoreGui then -- Double Check
-                    randomizedCoreGuiTable = randomizeTable(coreguiTable)
-                    return preloadBypass(a, randomizedCoreGuiTable, c)
-                end
-                if b[1] == game then -- Triple Check
-                    randomizedGameTable = randomizeTable(gameTable)
-                    return preloadBypass(a, randomizedGameTable, c)
-                end
-            end
-        end
-    end
-
-    return preloadBypass(a, b, c)
-end)
-
--- GetFocusedTextBox Bypass
 local _IsDescendantOf = game.IsDescendantOf
 
 local TextboxBypass
@@ -10245,7 +9749,7 @@ function RandomCharacters(length)
 end
 
 Bypassed_Dex.Name = RandomCharacters(math.random(5, 20))
-Bypassed_Dex.Parent = cloneref(game:GetService("CoreGui"))
+Bypassed_Dex.Parent = gethui()
 
 local function Load(Obj, Url)
     local function GiveOwnGlobals(Func, Script)
@@ -11423,7 +10927,7 @@ addcmd('fling',{},function(args, speaker)
 	if not rootpart then return end
 	flingtbl.OldVelocity = rootpart.Velocity
 	local bv = Instance.new("BodyAngularVelocity")
-	bv.Name = randomString()
+    bv.Name = randomString()
 	flingtbl.bv = bv
 	bv.MaxTorque = Vector3.new(1, 1, 1) * math.huge
 	bv.P = math.huge
@@ -12452,7 +11956,7 @@ IYMouse.Move:Connect(checkTT)
 
 task.spawn(function()
 	if pcall(function() loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/version'))() end) then
-		if ver == Version then
+		if ver ~= Version then
 			notify('Outdated','Get the new version at infyiff.github.io')
 		end
 		if Announcement and Announcement ~= '' then
