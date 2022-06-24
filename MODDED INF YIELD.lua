@@ -6827,7 +6827,7 @@ addcmd('float', {'platform'},function(args, speaker)
 			Float.Name = floatName
 			Float.Parent = pchar
 			Float.Transparency = 1
-			Float.Size = Vector3.new(0.001,0.2,0.001)
+			Float.Size = Vector3.new(0.001,0.2,2)
 			Float.Anchored = true
 			local FloatValue = -3.1
 			Float.CFrame = getRoot(pchar).CFrame * CFrame.new(0,FloatValue,0)
@@ -9694,46 +9694,6 @@ addcmd('console',{},function(args, speaker)
 end)
 
 addcmd('explorer',{'dex'},function(args, speaker)
-local _IsDescendantOf = game.IsDescendantOf
-
-local TextboxBypass
-TextboxBypass = hookmetamethod(game, "__namecall", function(self,...)
-    local method = getnamecallmethod();
-    local args = ...;
-
-    if not checkcaller() then
-        if typeof(self) == "Instance" and method == "GetFocusedTextBox" and self.ClassName == "UserInputService" then
-            local Textbox = TextboxBypass(self,...);
-            if Textbox and typeof(Textbox) == "Instance" then
-                local succ,err = pcall(function() _IsDescendantOf(Textbox, Bypassed_Dex) end)
-
-                if err and err:match("The current identity") then
-                    return nil;
-                end
-            end
-        end
-    end
-
-    return TextboxBypass(self,...);
-end)
-
---Newproxy Bypass (Stolen from Lego Hacker (V3RM))
-local TableNumbaor001 = {}
-local SomethingOld;
-SomethingOld = hookfunction(getrenv().newproxy, function(...)
-    local proxy = SomethingOld(...)
-    table.insert(TableNumbaor001, proxy)
-    return proxy
-end)
-
-local RunService = cloneref(game:GetService("RunService"))
-RunService.Stepped:Connect(function()
-    for i,v in pairs(TableNumbaor001) do
-        if v == nil then end
-    end
-end)
-
--- Dex with CloneRef Support (made as global)
 getgenv().Bypassed_Dex = game:GetObjects("rbxassetid://9352453730")[1]
 
 local charset = {}
