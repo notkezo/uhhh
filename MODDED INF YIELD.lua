@@ -50,7 +50,7 @@ if not game:IsLoaded() then
 	notLoaded:Destroy()
 end
 
-ver = '5.8'
+ver = '5.9'
 
 Players = game:GetService("Players")
 
@@ -96,14 +96,22 @@ Text_3 = Instance.new("TextLabel")
 Delete_2 = Instance.new("TextButton")
 KeybindEditor = Instance.new("Frame")
 background_2 = Instance.new("Frame")
-Dark_4 = Instance.new("Frame")
+Dark_3 = Instance.new("Frame")
 Directions = Instance.new("TextLabel")
 BindTo = Instance.new("TextButton")
+TriggerLabel = Instance.new("TextLabel")
+BindTriggerSelect = Instance.new("TextButton")
 Add_2 = Instance.new("TextButton")
-Cmdbar_2 = Instance.new("TextBox")
 Toggles = Instance.new("ScrollingFrame")
-Fly = Instance.new("TextLabel")
-Select_3 = Instance.new("TextButton")
+ClickTP  = Instance.new("TextLabel")
+Select = Instance.new("TextButton")
+ClickDelete = Instance.new("TextLabel")
+Select_2 = Instance.new("TextButton")
+Cmdbar_2 = Instance.new("TextBox")
+Cmdbar_3 = Instance.new("TextBox")
+CreateToggle = Instance.new("TextLabel")
+Button_2 = Instance.new("Frame")
+On_2 = Instance.new("TextButton")
 shadow_2 = Instance.new("Frame")
 PopupText_2 = Instance.new("TextLabel")
 Exit_2 = Instance.new("TextButton")
@@ -134,7 +142,7 @@ Text_6 = Instance.new("TextLabel")
 Delete_7 = Instance.new("TextButton")
 PluginEditor = Instance.new("Frame")
 background_3 = Instance.new("Frame")
-Dark_9 = Instance.new("Frame")
+Dark_2 = Instance.new("Frame")
 Img = Instance.new("ImageButton")
 AddPlugin = Instance.new("TextButton")
 FileName = Instance.new("TextBox")
@@ -148,10 +156,10 @@ AliasHint = Instance.new("TextLabel")
 PluginsHint = Instance.new("TextLabel")
 PositionsHint = Instance.new("TextLabel")
 ToPartFrame = Instance.new("Frame")
-background_5 = Instance.new("Frame")
+background_4 = Instance.new("Frame")
 ChoosePart = Instance.new("TextButton")
 CopyPath = Instance.new("TextButton")
-Directions_4 = Instance.new("TextLabel")
+Directions_3 = Instance.new("TextLabel")
 Path = Instance.new("TextLabel")
 shadow_4 = Instance.new("Frame")
 PopupText_5 = Instance.new("TextLabel")
@@ -200,7 +208,7 @@ elseif get_hidden_gui or gethui then
 	local hiddenUI = get_hidden_gui or gethui
 	local Main = Instance.new("ScreenGui")
 	Main.Name = randomString()
-	Main.Parent = gethui()
+	Main.Parent = hiddenUI()
 	PARENT = Main
 elseif COREGUI:FindFirstChild('RobloxGui') then
 	PARENT = COREGUI.RobloxGui
@@ -745,15 +753,15 @@ background_2.Size = UDim2.new(0, 360, 0, 185)
 background_2.ZIndex = 10
 table.insert(shade1,background_2)
 
-Dark_4.Name = "Dark"
-Dark_4.Parent = background_2
-Dark_4.Active = true
-Dark_4.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Dark_4.BorderSizePixel = 0
-Dark_4.Position = UDim2.new(0, 135, 0, 0)
-Dark_4.Size = UDim2.new(0, 2, 0, 185)
-Dark_4.ZIndex = 10
-table.insert(shade2,Dark_4)
+Dark_3.Name = "Dark"
+Dark_3.Parent = background_2
+Dark_3.Active = true
+Dark_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+Dark_3.BorderSizePixel = 0
+Dark_3.Position = UDim2.new(0, 135, 0, 0)
+Dark_3.Size = UDim2.new(0, 2, 0, 185)
+Dark_3.ZIndex = 10
+table.insert(shade2,Dark_3)
 
 Directions.Name = "Directions"
 Directions.Parent = background_2
@@ -761,13 +769,13 @@ Directions.BackgroundTransparency = 1
 Directions.BorderSizePixel = 0
 Directions.Position = UDim2.new(0, 10, 0, 15)
 Directions.Size = UDim2.new(0, 115, 0, 90)
+Directions.ZIndex = 10
 Directions.Font = Enum.Font.SourceSans
-Directions.TextSize = 14
 Directions.Text = "Click the button below and press a key/mouse button. Then select what you want to bind it to."
-Directions.TextColor3 = Color3.new(1, 1, 1)
+Directions.TextColor3 = Color3.fromRGB(255, 255, 255)
+Directions.TextSize = 14.000
 Directions.TextWrapped = true
 Directions.TextYAlignment = Enum.TextYAlignment.Top
-Directions.ZIndex = 10
 table.insert(text1,Directions)
 
 BindTo.Name = "BindTo"
@@ -776,40 +784,38 @@ BindTo.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
 BindTo.BorderSizePixel = 0
 BindTo.Position = UDim2.new(0, 10, 0, 95)
 BindTo.Size = UDim2.new(0, 115, 0, 50)
-BindTo.Font = Enum.Font.SourceSans
-BindTo.TextSize = 16
-BindTo.Text = "Click to bind"
-BindTo.TextColor3 = Color3.new(1, 1, 1)
 BindTo.ZIndex = 10
+BindTo.Font = Enum.Font.SourceSans
+BindTo.Text = "Click to bind"
+BindTo.TextColor3 = Color3.fromRGB(255, 255, 255)
+BindTo.TextSize = 16.000
 table.insert(shade2,BindTo)
 table.insert(text1,BindTo)
 
-BindTrigger = Instance.new("TextLabel")
-BindTrigger.Name = "TriggerLabel"
-BindTrigger.BackgroundTransparency = 1
-BindTrigger.Position = UDim2.new(0, 10, 0, 155)
-BindTrigger.Size = UDim2.new(0, 45, 0, 20)
-BindTrigger.Font = Enum.Font.SourceSans
-BindTrigger.TextSize = 14
-BindTrigger.Text = "Trigger:"
-BindTrigger.TextColor3 = Color3.new(1, 1, 1)
-BindTrigger.ZIndex = 10
-BindTrigger.TextXAlignment = Enum.TextXAlignment.Left
-BindTrigger.Parent = background_2
-table.insert(text1,BindTrigger)
+TriggerLabel.Name = "TriggerLabel"
+TriggerLabel.Parent = background_2
+TriggerLabel.BackgroundTransparency = 1
+TriggerLabel.Position = UDim2.new(0, 10, 0, 155)
+TriggerLabel.Size = UDim2.new(0, 45, 0, 20)
+TriggerLabel.ZIndex = 10
+TriggerLabel.Font = Enum.Font.SourceSans
+TriggerLabel.Text = "Trigger:"
+TriggerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TriggerLabel.TextSize = 14.000
+TriggerLabel.TextXAlignment = Enum.TextXAlignment.Left
+table.insert(text1,TriggerLabel)
 
-BindTriggerSelect = Instance.new("TextButton")
 BindTriggerSelect.Name = "BindTo"
 BindTriggerSelect.Parent = background_2
 BindTriggerSelect.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
 BindTriggerSelect.BorderSizePixel = 0
 BindTriggerSelect.Position = UDim2.new(0, 60, 0, 155)
 BindTriggerSelect.Size = UDim2.new(0, 65, 0, 20)
-BindTriggerSelect.Font = Enum.Font.SourceSans
-BindTriggerSelect.TextSize = 16
-BindTriggerSelect.Text = "KeyDown"
-BindTriggerSelect.TextColor3 = Color3.new(1, 1, 1)
 BindTriggerSelect.ZIndex = 10
+BindTriggerSelect.Font = Enum.Font.SourceSans
+BindTriggerSelect.Text = "KeyDown"
+BindTriggerSelect.TextColor3 = Color3.fromRGB(255, 255, 255)
+BindTriggerSelect.TextSize = 16.000
 table.insert(shade2,BindTriggerSelect)
 table.insert(text1,BindTriggerSelect)
 
@@ -817,73 +823,151 @@ Add_2.Name = "Add"
 Add_2.Parent = background_2
 Add_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
 Add_2.BorderSizePixel = 0
-Add_2.Position = UDim2.new(0, 310, 0, 20)
+Add_2.Position = UDim2.new(0, 310, 0, 35)
 Add_2.Size = UDim2.new(0, 40, 0, 20)
-Add_2.Font = Enum.Font.SourceSans
-Add_2.TextSize = 14
-Add_2.Text = "Add"
-Add_2.TextColor3 = Color3.new(1, 1, 1)
 Add_2.ZIndex = 10
+Add_2.Font = Enum.Font.SourceSans
+Add_2.Text = "Add"
+Add_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Add_2.TextSize = 14.000
 table.insert(shade2,Add_2)
 table.insert(text1,Add_2)
-
-Cmdbar_2.Name = "Cmdbar"
-Cmdbar_2.Parent = background_2
-Cmdbar_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Cmdbar_2.BorderSizePixel = 0
-Cmdbar_2.Position = UDim2.new(0, 150, 0, 20)
-Cmdbar_2.Size = UDim2.new(0, 150, 0, 20)
-Cmdbar_2.Font = Enum.Font.SourceSans
-Cmdbar_2.TextSize = 14
-Cmdbar_2.TextXAlignment = Enum.TextXAlignment.Left
-Cmdbar_2.TextColor3 = Color3.new(1, 1, 1)
-Cmdbar_2.Text = ""
-Cmdbar_2.ZIndex = 10
-Cmdbar_2.PlaceholderText = "Command"
 
 Toggles.Name = "Toggles"
 Toggles.Parent = background_2
 Toggles.BackgroundTransparency = 1
 Toggles.BorderSizePixel = 0
-Toggles.Position = UDim2.new(0, 150, 0, 50)
-Toggles.Size = UDim2.new(0, 200, 0, 125)
-Toggles.ScrollBarImageColor3 = Color3.fromRGB(78,78,79)
+Toggles.Position = UDim2.new(0, 150, 0, 125)
+Toggles.Size = UDim2.new(0, 200, 0, 50)
+Toggles.ZIndex = 10
 Toggles.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Toggles.CanvasSize = UDim2.new(0, 0, 0, 270)
-Toggles.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+Toggles.CanvasSize = UDim2.new(0, 0, 0, 50)
 Toggles.ScrollBarThickness = 8
 Toggles.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Toggles.VerticalScrollBarInset = 'Always'
-Toggles.ZIndex = 10
+Toggles.VerticalScrollBarInset = Enum.ScrollBarInset.Always
 table.insert(scroll,Toggles)
 
-Fly.Name = "Fly"
-Fly.Parent = Toggles
-Fly.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Fly.BorderSizePixel = 0
-Fly.Size = UDim2.new(0, 192, 0, 20)
-Fly.Font = Enum.Font.SourceSans
-Fly.TextSize = 14
-Fly.Text = "    Toggle Fly"
-Fly.TextColor3 = Color3.new(1, 1, 1)
-Fly.TextXAlignment = Enum.TextXAlignment.Left
-Fly.ZIndex = 10
-table.insert(shade2,Fly)
-table.insert(text1,Fly)
+ClickTP.Name = "Click TP (Hold Key & Click)"
+ClickTP.Parent = Toggles
+ClickTP.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+ClickTP.BorderSizePixel = 0
+ClickTP.Size = UDim2.new(0, 200, 0, 20)
+ClickTP.ZIndex = 10
+ClickTP.Font = Enum.Font.SourceSans
+ClickTP.Text = "    Click TP (Hold Key & Click)"
+ClickTP.TextColor3 = Color3.fromRGB(255, 255, 255)
+ClickTP.TextSize = 14.000
+ClickTP.TextXAlignment = Enum.TextXAlignment.Left
+table.insert(shade2,ClickTP)
+table.insert(text1,ClickTP)
 
-Select_3.Name = "Select"
-Select_3.Parent = Fly
-Select_3.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_3.BorderSizePixel = 0
-Select_3.Position = UDim2.new(0, 152, 0, 0)
-Select_3.Size = UDim2.new(0, 40, 0, 20)
-Select_3.Font = Enum.Font.SourceSans
-Select_3.TextSize = 14
-Select_3.Text = "Add"
-Select_3.TextColor3 = Color3.new(0, 0, 0)
-Select_3.ZIndex = 10
-table.insert(shade3,Select_3)
-table.insert(text2,Select_3)
+Select.Name = "Select"
+Select.Parent = ClickTP
+Select.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
+Select.BorderSizePixel = 0
+Select.Position = UDim2.new(0, 160, 0, 0)
+Select.Size = UDim2.new(0, 40, 0, 20)
+Select.ZIndex = 10
+Select.Font = Enum.Font.SourceSans
+Select.Text = "Add"
+Select.TextColor3 = Color3.fromRGB(0, 0, 0)
+Select.TextSize = 14.000
+table.insert(shade3,Select)
+table.insert(text2,Select)
+
+ClickDelete.Name = "Click Delete (Hold Key & Click)"
+ClickDelete.Parent = Toggles
+ClickDelete.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+ClickDelete.BorderSizePixel = 0
+ClickDelete.Position = UDim2.new(0, 0, 0, 25)
+ClickDelete.Size = UDim2.new(0, 200, 0, 20)
+ClickDelete.ZIndex = 10
+ClickDelete.Font = Enum.Font.SourceSans
+ClickDelete.Text = "    Click Delete (Hold Key & Click)"
+ClickDelete.TextColor3 = Color3.fromRGB(255, 255, 255)
+ClickDelete.TextSize = 14.000
+ClickDelete.TextXAlignment = Enum.TextXAlignment.Left
+table.insert(shade2,ClickDelete)
+table.insert(text1,ClickDelete)
+
+Select_2.Name = "Select"
+Select_2.Parent = ClickDelete
+Select_2.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
+Select_2.BorderSizePixel = 0
+Select_2.Position = UDim2.new(0, 160, 0, 0)
+Select_2.Size = UDim2.new(0, 40, 0, 20)
+Select_2.ZIndex = 10
+Select_2.Font = Enum.Font.SourceSans
+Select_2.Text = "Add"
+Select_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+Select_2.TextSize = 14.000
+table.insert(shade3,Select_2)
+table.insert(text2,Select_2)
+
+Cmdbar_2.Name = "Cmdbar_2"
+Cmdbar_2.Parent = background_2
+Cmdbar_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+Cmdbar_2.BorderSizePixel = 0
+Cmdbar_2.Position = UDim2.new(0, 150, 0, 35)
+Cmdbar_2.Size = UDim2.new(0, 150, 0, 20)
+Cmdbar_2.ZIndex = 10
+Cmdbar_2.Font = Enum.Font.SourceSans
+Cmdbar_2.PlaceholderText = "Command"
+Cmdbar_2.Text = ""
+Cmdbar_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Cmdbar_2.TextSize = 14.000
+Cmdbar_2.TextXAlignment = Enum.TextXAlignment.Left
+
+Cmdbar_3.Name = "Cmdbar_3"
+Cmdbar_3.Parent = background_2
+Cmdbar_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+Cmdbar_3.BorderSizePixel = 0
+Cmdbar_3.Position = UDim2.new(0, 150, 0, 60)
+Cmdbar_3.Size = UDim2.new(0, 150, 0, 20)
+Cmdbar_3.ZIndex = 10
+Cmdbar_3.Font = Enum.Font.SourceSans
+Cmdbar_3.PlaceholderText = "Command 2"
+Cmdbar_3.Text = ""
+Cmdbar_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Cmdbar_3.TextSize = 14.000
+Cmdbar_3.TextXAlignment = Enum.TextXAlignment.Left
+
+CreateToggle.Name = "CreateToggle"
+CreateToggle.Parent = background_2
+CreateToggle.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+CreateToggle.BackgroundTransparency = 1
+CreateToggle.BorderSizePixel = 0
+CreateToggle.Position = UDim2.new(0, 152, 0, 10)
+CreateToggle.Size = UDim2.new(0, 198, 0, 20)
+CreateToggle.ZIndex = 10
+CreateToggle.Font = Enum.Font.SourceSans
+CreateToggle.Text = "Create Toggle"
+CreateToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+CreateToggle.TextSize = 14.000
+CreateToggle.TextXAlignment = Enum.TextXAlignment.Left
+table.insert(text1,CreateToggle)
+
+Button_2.Name = "Button"
+Button_2.Parent = CreateToggle
+Button_2.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
+Button_2.BorderSizePixel = 0
+Button_2.Position = UDim2.new(1, -20, 0, 0)
+Button_2.Size = UDim2.new(0, 20, 0, 20)
+Button_2.ZIndex = 10
+table.insert(shade3,Button_2)
+
+On_2.Name = "On"
+On_2.Parent = Button_2
+On_2.BackgroundColor3 = Color3.fromRGB(150, 150, 151)
+On_2.BackgroundTransparency = 1
+On_2.BorderSizePixel = 0
+On_2.Position = UDim2.new(0, 2, 0, 2)
+On_2.Size = UDim2.new(0, 16, 0, 16)
+On_2.ZIndex = 10
+On_2.Font = Enum.Font.SourceSans
+On_2.Text = ""
+On_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+On_2.TextSize = 14.000
 
 shadow_2.Name = "shadow"
 shadow_2.Parent = KeybindEditor
@@ -893,33 +977,33 @@ shadow_2.Size = UDim2.new(0, 360, 0, 20)
 shadow_2.ZIndex = 10
 table.insert(shade2,shadow_2)
 
-PopupText_2.Name = "PopupText"
+PopupText_2.Name = "PopupText_2"
 PopupText_2.Parent = shadow_2
 PopupText_2.BackgroundTransparency = 1
-PopupText_2.Size = UDim2.new(1, 0, 0.95, 0)
+PopupText_2.Size = UDim2.new(1, 0, 0.949999988, 0)
 PopupText_2.ZIndex = 10
 PopupText_2.Font = Enum.Font.SourceSans
-PopupText_2.TextSize = 14
 PopupText_2.Text = "Set Keybinds"
-PopupText_2.TextColor3 = Color3.new(1, 1, 1)
+PopupText_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+PopupText_2.TextSize = 14.000
 PopupText_2.TextWrapped = true
 table.insert(text1,PopupText_2)
 
-Exit_2.Name = "Exit"
+Exit_2.Name = "Exit_2"
 Exit_2.Parent = shadow_2
 Exit_2.BackgroundTransparency = 1
 Exit_2.Position = UDim2.new(1, -20, 0, 0)
 Exit_2.Size = UDim2.new(0, 20, 0, 20)
-Exit_2.Text = ""
 Exit_2.ZIndex = 10
+Exit_2.Text = ""
 
 ExitImage_2.Parent = Exit_2
-ExitImage_2.BackgroundColor3 = Color3.new(1, 1, 1)
+ExitImage_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 ExitImage_2.BackgroundTransparency = 1
 ExitImage_2.Position = UDim2.new(0, 5, 0, 5)
 ExitImage_2.Size = UDim2.new(0, 10, 0, 10)
-ExitImage_2.Image = "rbxassetid://5054663650"
 ExitImage_2.ZIndex = 10
+ExitImage_2.Image = "rbxassetid://5054663650"
 
 PositionsFrame.Name = "PositionsFrame"
 PositionsFrame.Parent = Settings
@@ -1244,15 +1328,15 @@ background_3.Size = UDim2.new(0, 360, 0, 160)
 background_3.ZIndex = 10
 table.insert(shade1,background_3)
 
-Dark_9.Name = "Dark"
-Dark_9.Parent = background_3
-Dark_9.Active = true
-Dark_9.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Dark_9.BorderSizePixel = 0
-Dark_9.Position = UDim2.new(0, 222, 0, 0)
-Dark_9.Size = UDim2.new(0, 2, 0, 160)
-Dark_9.ZIndex = 10
-table.insert(shade2,Dark_9)
+Dark_2.Name = "Dark"
+Dark_2.Parent = background_3
+Dark_2.Active = true
+Dark_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+Dark_2.BorderSizePixel = 0
+Dark_2.Position = UDim2.new(0, 222, 0, 0)
+Dark_2.Size = UDim2.new(0, 2, 0, 160)
+Dark_2.ZIndex = 10
+table.insert(shade2,Dark_2)
 
 Img.Name = "Img"
 Img.Parent = background_3
@@ -1409,18 +1493,18 @@ ToPartFrame.Position = UDim2.new(0.5, -180, 0, -500)
 ToPartFrame.Size = UDim2.new(0, 360, 0, 20)
 ToPartFrame.ZIndex = 10
 
-background_5.Name = "background"
-background_5.Parent = ToPartFrame
-background_5.Active = true
-background_5.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-background_5.BorderSizePixel = 0
-background_5.Position = UDim2.new(0, 0, 0, 20)
-background_5.Size = UDim2.new(0, 360, 0, 117)
-background_5.ZIndex = 10
-table.insert(shade1,background_5)
+background_4.Name = "background"
+background_4.Parent = ToPartFrame
+background_4.Active = true
+background_4.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
+background_4.BorderSizePixel = 0
+background_4.Position = UDim2.new(0, 0, 0, 20)
+background_4.Size = UDim2.new(0, 360, 0, 117)
+background_4.ZIndex = 10
+table.insert(shade1,background_4)
 
 ChoosePart.Name = "ChoosePart"
-ChoosePart.Parent = background_5
+ChoosePart.Parent = background_4
 ChoosePart.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
 ChoosePart.BorderSizePixel = 0
 ChoosePart.Position = UDim2.new(0, 100, 0, 55)
@@ -1434,7 +1518,7 @@ table.insert(shade2,ChoosePart)
 table.insert(text1,ChoosePart)
 
 CopyPath.Name = "CopyPath"
-CopyPath.Parent = background_5
+CopyPath.Parent = background_4
 CopyPath.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
 CopyPath.BorderSizePixel = 0
 CopyPath.Position = UDim2.new(0, 185, 0, 55)
@@ -1447,23 +1531,23 @@ CopyPath.ZIndex = 10
 table.insert(shade2,CopyPath)
 table.insert(text1,CopyPath)
 
-Directions_4.Name = "Directions"
-Directions_4.Parent = background_5
-Directions_4.BackgroundTransparency = 1
-Directions_4.BorderSizePixel = 0
-Directions_4.Position = UDim2.new(0, 51, 0, 17)
-Directions_4.Size = UDim2.new(0, 257, 0, 32)
-Directions_4.Font = Enum.Font.SourceSans
-Directions_4.TextSize = 14
-Directions_4.Text = 'Click on a part and then click the "Select Part" button below to set it as a teleport location'
-Directions_4.TextColor3 = Color3.new(1, 1, 1)
-Directions_4.TextWrapped = true
-Directions_4.TextYAlignment = Enum.TextYAlignment.Top
-Directions_4.ZIndex = 10
-table.insert(text1,Directions_4)
+Directions_3.Name = "Directions"
+Directions_3.Parent = background_4
+Directions_3.BackgroundTransparency = 1
+Directions_3.BorderSizePixel = 0
+Directions_3.Position = UDim2.new(0, 51, 0, 17)
+Directions_3.Size = UDim2.new(0, 257, 0, 32)
+Directions_3.Font = Enum.Font.SourceSans
+Directions_3.TextSize = 14
+Directions_3.Text = 'Click on a part and then click the "Select Part" button below to set it as a teleport location'
+Directions_3.TextColor3 = Color3.new(1, 1, 1)
+Directions_3.TextWrapped = true
+Directions_3.TextYAlignment = Enum.TextYAlignment.Top
+Directions_3.ZIndex = 10
+table.insert(text1,Directions_3)
 
 Path.Name = "Path"
-Path.Parent = background_5
+Path.Parent = background_4
 Path.BackgroundTransparency = 1
 Path.BorderSizePixel = 0
 Path.Position = UDim2.new(0, 0, 0, 94)
@@ -1826,6 +1910,7 @@ end)()
 
 ViewportTextBox.convert(Cmdbar).View.ZIndex = 10
 ViewportTextBox.convert(Cmdbar_2).View.ZIndex = 10
+ViewportTextBox.convert(Cmdbar_3).View.ZIndex = 10
 
 IYMouse = Players.LocalPlayer:GetMouse()
 UserInputService = game:GetService("UserInputService")
@@ -4297,6 +4382,7 @@ CMDs[#CMDs + 1] = {NAME = 'thirdp', DESC = 'Allows camera to go into third perso
 CMDs[#CMDs + 1] = {NAME = 'noclipcam / nccam', DESC = 'Allows camera to go through objects like walls'}
 CMDs[#CMDs + 1] = {NAME = 'maxzoom [num]', DESC = 'Maximum camera zoom'}
 CMDs[#CMDs + 1] = {NAME = 'minzoom [num]', DESC = 'Minimum camera zoom'}
+CMDs[#CMDs + 1] = {NAME = 'camdistance [num]', DESC = 'Changes camera distance from your player'}
 CMDs[#CMDs + 1] = {NAME = 'fov [num]', DESC = 'Adjusts field of view (default is 70)'}
 CMDs[#CMDs + 1] = {NAME = 'fixcam / restorecam', DESC = 'Fixes camera'}
 CMDs[#CMDs + 1] = {NAME = 'enableshiftlock / enablesl', DESC = 'Enables the shift lock option'}
@@ -4659,7 +4745,7 @@ Players.LocalPlayer.CharacterAdded:Connect(function()
 	Floating = false
 
 	if not Clip then
-		execCmd('clip nonotify')
+		execCmd('clip')
 	end
 
 	repeat wait() until getRoot(Players.LocalPlayer.Character)
@@ -4824,13 +4910,23 @@ function removecmd(cmd)
 	end
 end
 
-function addbind(cmd,key,iskeyup)
+function addbind(cmd,key,iskeyup,toggle)
+	if toggle then
 	binds[#binds+1]=
+	{
+		COMMAND=cmd;
+		KEY=key;
+		ISKEYUP=iskeyup;
+		TOGGLE = toggle;
+	}
+	else
+		binds[#binds+1]=
 		{
 			COMMAND=cmd;
 			KEY=key;
 			ISKEYUP=iskeyup;
 		}
+	end
 end
 
 function addcmdtext(text,name,desc)
@@ -4866,10 +4962,10 @@ end
 
 local GetClosestPlayerFromCursor = function()
 	local found = nil
-    local ClosestDistance = math.huge
-    for i, v in pairs(Players:GetPlayers()) do
-        if v ~= Players.LocalPlayer and v.Character and v.Character:FindFirstChildOfClass("Humanoid") then
-            for k, x in pairs(v.Character:GetChildren()) do
+	local ClosestDistance = math.huge
+	for i, v in pairs(Players:GetPlayers()) do
+		if v ~= Players.LocalPlayer and v.Character and v.Character:FindFirstChildOfClass("Humanoid") then
+			for k, x in pairs(v.Character:GetChildren()) do
 				if string.find(x.Name, "Torso") then
 					local Distance = (WTS(x) - MousePositionToVector2()).Magnitude
 					if Distance < ClosestDistance then
@@ -4877,9 +4973,9 @@ local GetClosestPlayerFromCursor = function()
 						found = v
 					end
 				end
-            end
-        end
-    end
+			end
+		end
+	end
 	return found
 end
 
@@ -5543,61 +5639,6 @@ local bindsGUI = KeybindEditor
 local awaitingInput = false
 local keySelected = false
 
-local positionbind = 0
-makeBindsButton = function(text, cmd, to)
-	local tog = Fly:Clone()
-	tog.Name = text
-	tog.Parent = Toggles
-	tog.Text = "    " .. text
-	positionbind = positionbind + 25
-	tog.Position = UDim2.new(0, 0, 0, positionbind)
-	table.insert(shade2, tog)
-	table.insert(text1, tog)
-	local togsel = Select_3:Clone()
-	togsel.Parent = tog
-	table.insert(shade3, togsel)
-	table.insert(text2, togsel)
-	togsel.MouseButton1Click:Connect(function()
-		if keySelected then
-			addbind(cmd,keyPressed,bindChosenKeyUp)
-			refreshbinds()
-			updatesaves()
-			if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-				notify('Keybinds Updated','Binded '..keyPressed..' to '..to)
-			else
-				notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to '..to)
-			end
-		end
-	end)
-end
-
-makeBindsButton("Toggle Noclip", "togglenoclip", "toggle noclip")
-makeBindsButton("Toggle Float", "togglefloat", "toggle float")
-makeBindsButton("Click TP (Hold Key & Click)", "clicktp", "click tp")
-makeBindsButton("Click Delete (Hold Key & Click)", "clickdel", "click delete")
-makeBindsButton("Toggle Xray", "togglexray", "toggle xray")
-makeBindsButton("Toggle Swim", "toggleswim", "toggle swim")
-makeBindsButton("Toggle Fling", "togglefling", "toggle fling")
-makeBindsButton("Toggle Invisible", "toggleinvis", "toggle invisible")
-makeBindsButton("Toggle VehicleFly", "togglevfly", "toggle vehiclefly")
-makeBindsButton("Toggle VehicleNoclip", "togglevnoclip", "toggle vehiclenoclip")
-Toggles.CanvasSize = UDim2.new(0, 0, 0, positionbind + 20)
-
-function unkeybind(cmd,key)
-	for i = #binds,1,-1 do
-		if binds[i].COMMAND == cmd and binds[i].KEY == key then
-			table.remove(binds, i)
-		end
-	end
-	refreshbinds()
-	updatesaves()
-	if key == 'RightClick' or key == 'LeftClick' then
-		notify('Keybinds Updated','Unbinded '..key..' from '..cmd)
-	else
-		notify('Keybinds Updated','Unbinded '..key:sub(14)..' from '..cmd)
-	end
-end
-
 function refreshbinds()
 	if Holder_2 then
 		Holder_2:ClearAllChildren()
@@ -5621,7 +5662,11 @@ function refreshbinds()
 			else
 				key = input:sub(14)
 			end
-			newbind.Text.Text = key.." > "..binds[i].COMMAND.."  "..(binds[i].ISKEYUP and "(keyup)" or "(keydown)")
+			if binds[i].TOGGLE then
+				newbind.Text.Text = key.." > "..binds[i].COMMAND.." / "..binds[i].TOGGLE
+			else
+				newbind.Text.Text = key.." > "..binds[i].COMMAND.."  "..(binds[i].ISKEYUP and "(keyup)" or "(keydown)")
+			end
 			Holder_2.CanvasSize = UDim2.new(0,0,0, Position + 30)
 			newbind.Text.Delete.MouseButton1Click:Connect(function()
 				unkeybind(binds[i].COMMAND,binds[i].KEY)
@@ -5631,6 +5676,24 @@ function refreshbinds()
 end
 
 refreshbinds()
+
+toggleOn = {}
+
+function unkeybind(cmd,key)
+	for i = #binds,1,-1 do
+		if binds[i].COMMAND == cmd and binds[i].KEY == key then
+			toggleOn[binds[i]] = nil
+			table.remove(binds, i)
+		end
+	end
+	refreshbinds()
+	updatesaves()
+	if key == 'RightClick' or key == 'LeftClick' then
+		notify('Keybinds Updated','Unbinded '..key..' from '..cmd)
+	else
+		notify('Keybinds Updated','Unbinded '..key:sub(14)..' from '..cmd)
+	end
+end
 
 PositionsFrame.Delete.MouseButton1Click:Connect(function()
 	execCmd('cpos')
@@ -5736,18 +5799,38 @@ BindTriggerSelect.MouseButton1Click:Connect(function()
 	BindTriggerSelect.Text = bindChosenKeyUp and "KeyUp" or "KeyDown"
 end)
 
+newToggle = false
+Cmdbar_3.Parent.Visible = false
+On_2.MouseButton1Click:Connect(function()
+	if newToggle == false then newToggle = true
+		On_2.BackgroundTransparency = 0
+		Cmdbar_3.Parent.Visible = true
+		BindTriggerSelect.Visible = false
+	else newToggle = false
+		On_2.BackgroundTransparency = 1
+		Cmdbar_3.Parent.Visible = false
+		BindTriggerSelect.Visible = true
+	end
+end)
+
 Add_2.MouseButton1Click:Connect(function()
 	if keySelected then
-		if string.find(Cmdbar_2.Text, "\\\\") then
+		if string.find(Cmdbar_2.Text, "\\\\") or string.find(Cmdbar_3.Text, "\\\\") then
 			notify('Keybind Error','Only use one backslash to keybind multiple commands into one keybind or command')
 		else
-			addbind(Cmdbar_2.Text,keyPressed,bindChosenKeyUp)
+			if newToggle and Cmdbar_3.Text ~= '' and Cmdbar_2.text ~= '' then
+				addbind(Cmdbar_2.Text,keyPressed,false,Cmdbar_3.Text)
+			elseif not newToggle and Cmdbar_2.text ~= '' then
+				addbind(Cmdbar_2.Text,keyPressed,bindChosenKeyUp)
+			else
+				return
+			end
 			refreshbinds()
 			updatesaves()
 			if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-				notify('Keybinds Updated','Binded '..keyPressed..' to '..Cmdbar_2.Text)
+				notify('Keybinds Updated','Binded '..keyPressed..' to '..Cmdbar_2.Text..(newToggle and " / "..Cmdbar_3.Text or ""))
 			else
-				notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to '..Cmdbar_2.Text)
+				notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to '..Cmdbar_2.Text..(newToggle and " / "..Cmdbar_3.Text or ""))
 			end
 		end
 	end
@@ -5755,6 +5838,7 @@ end)
 
 Exit_2.MouseButton1Click:Connect(function()
 	Cmdbar_2.Text = 'Command'
+	Cmdbar_3.Text = 'Command 2'
 	BindTo.Text = 'Click to bind'
 	bindChosenKeyUp = false
 	BindTriggerSelect.Text = "KeyDown"
@@ -5780,12 +5864,18 @@ function onInputBegan(input,gameProcessed)
 	if not gameProcessed and #binds > 0 then
 		for i,v in pairs(binds) do
 			if not v.ISKEYUP then
-				if input.UserInputType == Enum.UserInputType.Keyboard and v.KEY:lower()==tostring(input.KeyCode):lower() then
-					execCmd(v.COMMAND,Players.LocalPlayer)
-				elseif input.UserInputType == Enum.UserInputType.MouseButton1 and v.KEY:lower()=='leftclick' then
-					execCmd(v.COMMAND,Players.LocalPlayer)
-				elseif input.UserInputType == Enum.UserInputType.MouseButton2 and v.KEY:lower()=='rightclick' then
-					execCmd(v.COMMAND,Players.LocalPlayer)
+				if (input.UserInputType == Enum.UserInputType.Keyboard and v.KEY:lower()==tostring(input.KeyCode):lower()) or (input.UserInputType == Enum.UserInputType.MouseButton1 and v.KEY:lower()=='leftclick') or (input.UserInputType == Enum.UserInputType.MouseButton2 and v.KEY:lower()=='rightclick') then
+					if v.TOGGLE then
+						local isOn = toggleOn[v] == true
+						toggleOn[v] = not isOn
+						if isOn then
+							execCmd(v.TOGGLE,Players.LocalPlayer)
+						else
+							execCmd(v.COMMAND,Players.LocalPlayer)
+						end
+					else
+						execCmd(v.COMMAND,Players.LocalPlayer)
+					end
 				end
 			end
 		end
@@ -5796,11 +5886,7 @@ function onInputEnded(input,gameProcessed)
 	if not gameProcessed and #binds > 0 then
 		for i,v in pairs(binds) do
 			if v.ISKEYUP then
-				if input.UserInputType == Enum.UserInputType.Keyboard and v.KEY:lower()==tostring(input.KeyCode):lower() then
-					execCmd(v.COMMAND,Players.LocalPlayer)
-				elseif input.UserInputType == Enum.UserInputType.MouseButton1 and v.KEY:lower()=='leftclick' then
-					execCmd(v.COMMAND,Players.LocalPlayer)
-				elseif input.UserInputType == Enum.UserInputType.MouseButton2 and v.KEY:lower()=='rightclick' then
+				if (input.UserInputType == Enum.UserInputType.Keyboard and v.KEY:lower()==tostring(input.KeyCode):lower()) or (input.UserInputType == Enum.UserInputType.MouseButton1 and v.KEY:lower()=='leftclick') or (input.UserInputType == Enum.UserInputType.MouseButton2 and v.KEY:lower()=='rightclick') then
 					execCmd(v.COMMAND,Players.LocalPlayer)
 				end
 			end
@@ -5811,15 +5897,28 @@ end
 UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputEnded:Connect(onInputEnded)
 
-Fly.Select.MouseButton1Click:Connect(function()
+ClickTP.Select.MouseButton1Click:Connect(function()
 	if keySelected then
-		addbind('togglefly',keyPressed,bindChosenKeyUp)
+		addbind('clicktp',keyPressed,bindChosenKeyUp)
 		refreshbinds()
 		updatesaves()
 		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-			notify('Keybinds Updated','Binded '..keyPressed..' to toggle fly')
+			notify('Keybinds Updated','Binded '..keyPressed..' to click tp')
 		else
-			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle fly')
+			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to click tp')
+		end
+	end
+end)
+
+ClickDelete.Select.MouseButton1Click:Connect(function()
+	if keySelected then
+		addbind('clickdel',keyPressed,bindChosenKeyUp)
+		refreshbinds()
+		updatesaves()
+		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
+			notify('Keybinds Updated','Binded '..keyPressed..' to click delete')
+		else
+			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to click delete')
 		end
 	end
 end)
@@ -6599,8 +6698,6 @@ addcmd('noclip',{},function(args, speaker)
 		end
 	end
 	Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
-	if args[1] and args[1] == 'nonotify' then return end
-	notify('Noclip','Noclip Enabled')
 end)
 
 addcmd('clip',{'unnoclip'},function(args, speaker)
@@ -6608,8 +6705,6 @@ addcmd('clip',{'unnoclip'},function(args, speaker)
 		Noclipping:Disconnect()
 	end
 	Clip = true
-	if args[1] and args[1] == 'nonotify' then return end
-	notify('Noclip','Noclip Disabled')
 end)
 
 addcmd('togglenoclip',{},function(args, speaker)
@@ -6638,8 +6733,8 @@ function sFLY(vfly)
 		FLYING = true
 		local BG = Instance.new('BodyGyro')
 		local BV = Instance.new('BodyVelocity')
-        BG.Name = randomString()
-        BV.Name = randomString()
+		BG.Name = randomString()
+		BV.Name = randomString()
 		BG.P = 9e4
 		BG.Parent = T
 		BV.Parent = T
@@ -7330,21 +7425,21 @@ addcmd('clientantikick',{'antikick'},function(args, speaker)
 	if not hookmetamethod then 
 		return notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
 	end
-local LocalPlayer = Players.LocalPlayer
-local oldhmmi
-local oldhmmnc
-    oldhmmi = hookmetamethod(game, "__index", function(self, method)
-        if self == LocalPlayer and method:lower() == "kick" then
-            return error("Expected ':' not '.' calling member function Kick", 2)
-        end
-        return oldhmmi(self, method)
-    end)
-    oldhmmnc = hookmetamethod(game, "__namecall", function(self, ...)
-        if self == LocalPlayer and getnamecallmethod():lower() == "kick" then
-            return
-        end
-        return oldhmmnc(self, ...)
-    end)
+	local LocalPlayer = Players.LocalPlayer
+	local oldhmmi
+	local oldhmmnc
+	oldhmmi = hookmetamethod(game, "__index", function(self, method)
+		if self == LocalPlayer and method:lower() == "kick" then
+			return error("Expected ':' not '.' calling member function Kick", 2)
+		end
+		return oldhmmi(self, method)
+	end)
+	oldhmmnc = hookmetamethod(game, "__namecall", function(self, ...)
+		if self == LocalPlayer and getnamecallmethod():lower() == "kick" then
+			return
+		end
+		return oldhmmnc(self, ...)
+	end)
 
 	notify('Client Antikick','Client anti kick is now active (only effective on localscript kick)')
 end)
@@ -8068,6 +8163,19 @@ addcmd('minzoom',{},function(args, speaker)
 	speaker.CameraMinZoomDistance = args[1]
 end)
 
+addcmd('camdistance',{},function(args, speaker)
+	local camMax = speaker.CameraMaxZoomDistance
+	local camMin = speaker.CameraMinZoomDistance
+	if camMax < tonumber(args[1]) then
+		camMax = args[1]
+	end
+	speaker.CameraMaxZoomDistance = args[1]
+	speaker.CameraMinZoomDistance = args[1]
+	wait()
+	speaker.CameraMaxZoomDistance = camMax
+	speaker.CameraMinZoomDistance = camMin
+end)
+
 addcmd('unlockws',{'unlockworkspace'},function(args, speaker)
 	for i,v in pairs(workspace:GetDescendants()) do
 		if v:IsA("BasePart") then
@@ -8181,13 +8289,13 @@ addcmd('antiafk',{'antiidle'},function(args, speaker)
 			end
 		end
 	else
-        local VirtualUser = game:GetService("VirtualUser")
-        Players.LocalPlayer.Idled:Connect(function()
-            VirtualUser:CaptureController()
-            VirtualUser:ClickButton2(Vector2.new())
-        end)
+		local VirtualUser = game:GetService("VirtualUser")
+		Players.LocalPlayer.Idled:Connect(function()
+			VirtualUser:CaptureController()
+			VirtualUser:ClickButton2(Vector2.new())
+		end)
 	end
-    notify('Anti Idle','Anti idle is enabled')
+	notify('Anti Idle','Anti idle is enabled')
 end)
 
 addcmd('datalimit',{},function(args, speaker)
@@ -9540,24 +9648,31 @@ end)
 
 addcmd('spoofspeed',{'spoofws','spoofwalkspeed'},function(args, speaker)
 	if args[1] and isNumber(args[1]) then
-		local getrawmt = (debug and debug.getmetatable) or getrawmetatable
-		local setReadOnly = setreadonly or (make_writeable and function(table, readonly) if readonly then make_readonly(table) else make_writeable(table) end end)
-		local gameMt = getrawmt(game)
-		if gameMt then
-			local OldIndex = gameMt.__index
-			setReadOnly(gameMt, false)
-			gameMt.__index = newcclosure(function(Self, Self2)
-				if Self:IsA('Humanoid') and string.lower(tostring(Self2)) == 'walkspeed' then
-					return args[1]
+		if hookmetamethod then
+			local char = speaker.Character
+			local setspeed;
+			local index; index = hookmetamethod(game, "__index", function(self, key)
+				local keyclean = key:gsub("\0", "")
+				if (keyclean == "WalkSpeed" or keyclean == "walkSpeed") and self:IsA("Humanoid") and self:IsDescendantOf(char) and not checkcaller() then
+					return setspeed or args[1]
 				end
-				return OldIndex(Self, Self2)
+                return index(self, key)
 			end)
-			setReadOnly(gameMt, true)
+
+		    local newindex; newindex = hookmetamethod(game, "__newindex", function(self, key, value)
+			    local keyclean = string.gsub(key, "\0", "")
+				if (keyclean == "WalkSpeed" or keyclean == "walkSpeed") and self:IsA("Humanoid") and self:IsDescendantOf(char) and not checkcaller() then
+					setspeed = tonumber(value)
+					return setspeed
+				end
+                return newindex(self, key, value)
+		    end)
 		else
-			notify('Incompatible Exploit','Your exploit does not support this command (missing getrawmetatable)')
+			notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
 		end
 	end
 end)
+
 
 addcmd('loopspeed',{'loopws'},function(args, speaker)
 	local speed = args[1] or 16
@@ -9752,7 +9867,7 @@ end)
 addcmd('remotespy',{'rspy'},function(args, speaker)
 	notify("Loading",'Hold on a sec')
 	-- Full credit to exx, creator of SimpleSpy
-        -- also thanks to NoobSploit for fixing
+	-- also thanks to NoobSploit for fixing
 	loadstring(game:HttpGet("https://gist.githubusercontent.com/Toon-arch/8f5af8403ca5dabad30763ab2b1cf8d0/raw/87d9847dd85850777e691e46d0c52f9020b42ee2/spy"))()
 end)
 
@@ -10886,7 +11001,7 @@ addcmd('fling',{},function(args, speaker)
 	if not rootpart then return end
 	flingtbl.OldVelocity = rootpart.Velocity
 	local bv = Instance.new("BodyAngularVelocity")
-    bv.Name = randomString()
+	bv.Name = randomString()
 	flingtbl.bv = bv
 	bv.MaxTorque = Vector3.new(1, 1, 1) * math.huge
 	bv.P = math.huge
@@ -11540,7 +11655,7 @@ addcmd('trip',{},function(args, speaker)
 		local hum = speaker.Character:FindFirstChildOfClass("Humanoid")
 		local root = getRoot(speaker.Character)
 		hum:ChangeState(0)
-                root.Velocity = root.CFrame.LookVector * 30
+		root.Velocity = root.CFrame.LookVector * 30
 	end
 end)
 
