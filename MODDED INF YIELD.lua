@@ -6929,7 +6929,7 @@ addcmd('float', {'platform'},function(args, speaker)
 			Float.Name = floatName
 			Float.Parent = pchar
 			Float.Transparency = 1
-			Float.Size = Vector3.new(2,2,2)
+			Float.Size = Vector3.new(2,0.2,2)
 			Float.Anchored = true
 			local FloatValue = -3.1
 			Float.CFrame = getRoot(pchar).CFrame * CFrame.new(0,FloatValue,0)
