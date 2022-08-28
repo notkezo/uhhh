@@ -11010,21 +11010,17 @@ addcmd('joinlogs',{'jlogs'},function(args, speaker)
 end)
 
 flinging = false
+local flingtbl = {}
 addcmd('fling',{},function(args, speaker)
-	flinging = false
-	for _, child in pairs(speaker.Character:GetDescendants()) do
-		if child:IsA("BasePart") then
-			child.CustomPhysicalProperties = PhysicalProperties.new(math.huge, 0.3, 0.5)
-		end
-	end
-	execCmd('noclip')
-	wait(.1)
-	local bambam = Instance.new("BodyAngularVelocity")
-	bambam.Name = randomString()
-	bambam.Parent = getRoot(speaker.Character)
-	bambam.AngularVelocity = Vector3.new(0,99999,0)
-	bambam.MaxTorque = Vector3.new(0,math.huge,0)
-	bambam.P = math.huge
+	local rootpart = getRoot(speaker.Character)
+	if not rootpart then return end
+	flingtbl.OldVelocity = rootpart.Velocity
+	local bv = Instance.new("BodyAngularVelocity")
+	flingtbl.bv = bv
+	bv.MaxTorque = Vector3.new(1, 1, 1) * math.huge
+	bv.P = math.huge
+	bv.AngularVelocity = Vector3.new(0, 9e5, 0)
+	bv.Parent = rootpart
 	local Char = speaker.Character:GetChildren()
 	for i, v in next, Char do
 		if v:IsA("BasePart") then
@@ -11033,38 +11029,60 @@ addcmd('fling',{},function(args, speaker)
 			v.Velocity = Vector3.new(0, 0, 0)
 		end
 	end
+	flingtbl.Noclipping2 = game:GetService("RunService").Stepped:Connect(function()
+		for i, v in next, Char do
+			if v:IsA("BasePart") then
+				v.CanCollide = false
+			end
+		end
+	end)
 	flinging = true
-	local function flingDiedF()
-		execCmd('unfling')
-	end
-	flingDied = speaker.Character:FindFirstChildOfClass('Humanoid').Died:Connect(flingDiedF)
-	repeat
-		bambam.AngularVelocity = Vector3.new(0,99999,0)
-		wait(.2)
-		bambam.AngularVelocity = Vector3.new(0,0,0)
-		wait(.1)
-	until flinging == false
 end)
 
-addcmd('unfling',{'nofling'},function(args, speaker)
-	execCmd('clip')
-	if flingDied then
-		flingDied:Disconnect()
+addcmd('unfling',{},function(args, speaker)
+	local rootpart = getRoot(speaker.Character)
+	if not rootpart then return end
+	flingtbl.OldPos = rootpart.CFrame
+	local Char = speaker.Character:GetChildren()
+	if flingtbl.bv ~= nil then
+		flingtbl.bv:Destroy()
+		flingtbl.bv = nil
 	end
+	if flingtbl.Noclipping2 ~= nil then
+		flingtbl.Noclipping2:Disconnect()
+		flingtbl.Noclipping2 = nil
+	end
+	for i, v in next, Char do
+		if v:IsA("BasePart") then
+			v.CanCollide = true
+			v.Massless = false
+		end
+	end
+	flingtbl.isRunning = game:GetService("RunService").Stepped:Connect(function()
+		if flingtbl.OldPos ~= nil then
+			rootpart.CFrame = flingtbl.OldPos
+		end
+		if flingtbl.OldVelocity ~= nil then
+			rootpart.Velocity = flingtbl.OldVelocity
+		end
+	end)
+	wait(2)
+	rootpart.Anchored = true
+	if flingtbl.isRunning ~= nil then
+		flingtbl.isRunning:Disconnect()
+		flingtbl.isRunning = nil
+	end
+	rootpart.Anchored = false
+	if flingtbl.OldVelocity ~= nil then
+		rootpart.Velocity = flingtbl.OldVelocity
+	end
+	if flingtbl.OldPos ~= nil then
+		rootpart.CFrame = flingtbl.OldPos
+	end
+	wait()
+	flingtbl.OldVelocity = nil
+	flingtbl.OldPos = nil
 	flinging = false
-	wait(.1)
-	local speakerChar = speaker.Character
-	if not speakerChar or not getRoot(speakerChar) then return end
-	for i,v in pairs(getRoot(speakerChar):GetChildren()) do
-		if v.ClassName == 'BodyAngularVelocity' then
-			v:Destroy()
-		end
-	end
-	for _, child in pairs(speakerChar:GetDescendants()) do
-		if child.ClassName == "Part" or child.ClassName == "MeshPart" then
-			child.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.3, 0.5)
-		end
-	end
 end)
 
 addcmd('togglefling',{},function(args, speaker)
