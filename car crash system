@@ -1,0 +1,64 @@
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
+local w = library:CreateWindow("spawner by notkezo") -- Creates the window
+
+local b = w:CreateFolder("Tier 2") -- Creates the folder(U will put here your buttons,etc)
+
+local e = w:CreateFolder("Tier 3")
+
+local c = w:CreateFolder("Delete gui")
+
+
+b:Button("tuned sedan",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Sedan")
+end)
+
+b:Button("tuned cab",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Cab")
+end)
+
+b:Button("protected sedan",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("Protected Sedan")
+end)
+
+b:Button("swat station truck",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("SWAT truck2")
+end)
+
+b:Button("big sedan",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("Big Sedan")
+end)
+
+b:Button("tyrota chest tuned",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Tyrota chest")
+end)
+
+b:Button("nuke fuel truck",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("VIP Fuel truck")
+end)
+
+b:Button("tuned cupra",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Tyrota cupra")
+end)
+
+b:Button("cherry truck 2 trailer",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("Truck double trailer")
+end)
+
+b:Button("dodged roger armored",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("Dodged Roger [ARMORED]")
+end)
+
+b:Button("tuned dirt bike",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Dirt bike")
+end)
+
+e:Button("ThrusterSSC",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 3] ThrusterSSC")
+end)
+
+e:Button("Mining truck",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 3] Mining truck")
+end)
+
+c:DestroyGui()
