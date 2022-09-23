@@ -53,6 +53,10 @@ b:Button("tuned dirt bike",function()
     game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Dirt bike")
 end)
 
+b:Button("tuned cobra simic",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Cobra Simic")
+end)
+
 e:Button("ThrusterSSC",function()
     game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 3] ThrusterSSC")
 end)
