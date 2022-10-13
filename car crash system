@@ -10,55 +10,59 @@ local c = w:CreateFolder("Delete gui")
 
 
 b:Button("tuned sedan",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Sedan")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Sedan")
 end)
 
 b:Button("tuned cab",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Cab")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Cab")
 end)
 
 b:Button("protected sedan",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("Protected Sedan")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Protected Sedan")
 end)
 
 b:Button("swat station truck",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("SWAT truck2")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] SWAT truck")
 end)
 
 b:Button("big sedan",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("Big Sedan")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Big Sedan")
 end)
 
 b:Button("tyrota chest tuned",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Tyrota chest")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Tyrota chest")
 end)
 
 b:Button("nuke fuel truck",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("VIP Fuel truck")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Fuel truck")
 end)
 
 b:Button("tuned cupra",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Tyrota cupra")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Tyrota cupra")
 end)
 
 b:Button("cherry truck 2 trailer",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("Truck double trailer")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Truck trailer")
 end)
 
 b:Button("dodged roger armored",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("Dodged Roger [ARMORED]")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Dodged Roger")
 end)
 
 b:Button("tuned dirt bike",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Dirt bike")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Dirt bike")
 end)
 
 b:Button("tuned cobra simic",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Cobra Simic")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Cobra Simic")
 end)
 
 b:Button("tuned lemon door",function()
-    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TUNED] Lemon door")
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Lemon door")
+end)
+
+b:Button("tuned bus",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 2] Bus")
 end)
 
 e:Button("ThrusterSSC",function()
@@ -67,6 +71,10 @@ end)
 
 e:Button("Mining truck",function()
     game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 3] Mining truck")
+end)
+
+e:Button("Tank",function()
+    game:GetService("ReplicatedStorage").SpawnCar:FireServer("[TIER 3] Tank")
 end)
 
 c:DestroyGui()
